@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .hidden{
+            display: none;
+        }
+        .show{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<table>
+
+    <div id="loginForm" class="show">
+        <h1>请登陆</h1>
+        <input type="text" id="username">
+        <input type="password" id="password">
+        <button>login</button>
+    </div>
+
+    <thead>
+    <tr>
+        <td>id</td>
+        <td>name</td>
+        <td>操作</td>
+    </tr>
+    </thead>
+    <tbody id="tbody">
+
+    </tbody>
+
+</table>
+</body>
+
+<script>
+    var books
+    var str = ''
+    var url_books = "http://localhost:3000/books"
+
+
+    function show(){
+        var tbody = document.querySelector("#tbody")
+        tbody.innerHTML = ''
+        for (let i = 0; i< books.length;i++){
+            str = str +
+                `
+                <tr>
+                <td>${books[i].id}</td>
+                <td>${books[i].name}</td>
+                <td><button onclick="remove(${books[i].id})">del</button></td>
+                </tr>
+                `
+        }
+        tbody.innerHTML = str
+    }
+
+    function remove(id){
+        let login = document.querySelector('#loginForm')
+
+    }
+
+
+    fetch(url_books)
+        .then(resp=>resp.json())
+        .then(rs=>{
+            books = rs
+            show()
+        })
+
+</script>
+
+
+</html>
